@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDIT As Syafi'iyah 01 - Sekolah Dasar Islam Terpadu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0d4c27 0%, #1e7e4d 25%, #2ecc71 50%, #1e7e4d 75%, #0f5f38 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #333;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Cursor Custom */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #1eca7b;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: screen;
+            box-shadow: 0 0 10px #1eca7b;
+        }
+
+        .cursor-dot {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: #1eca7b;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            box-shadow: 0 0 5px #1eca7b;
+        }
+
+        /* Particle Container */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: slideDown 0.8s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #0d4c27, #1e7e4d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        nav a {
+            color: #333;
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, #1eca7b, #16a34a);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Banner Section */
+        .banner {
+            background: linear-gradient(rgba(13, 76, 39, 0.6), rgba(13, 76, 39, 0.7)), url('https://cdn-sekolah.annibuku.com/20102747/5.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 20px;
+            animation: fadeInDown 1s ease 0.3s both;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .banner-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .banner h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            animation: textGlow 3s ease-in-out infinite;
+            font-weight: bold;
+        }
+
+        .banner p {
+            font-size: 22px;
+            color: white;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .banner .cta-button {
+            animation: fadeInUp 1s ease 0.9s both;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        main > section:not(.banner) {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: textGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), 0 0 20px rgba(30, 202, 123, 0.5); }
+            50% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), 0 0 40px rgba(30, 202, 123, 0.8); }
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: white;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #1eca7b, #16a34a);
+            color: white;
+            padding: 20px 60px;
+            font-size: 18px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(30, 202, 123, 0.4);
+            animation: fadeInUp 1s ease 0.9s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(30, 202, 123, 0.6);
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease both;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.3s; }
+        .feature-card:nth-child(2) { animation-delay: 0.5s; }
+        .feature-card:nth-child(3) { animation-delay: 0.7s; }
+        .feature-card:nth-child(4) { animation-delay: 0.9s; }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            animation: rotate 4s linear infinite;
+        }
+
+        .feature-card:hover .feature-icon {
+            animation: bounceIcon 0.6s ease-in-out;
+        }
+
+        @keyframes bounceIcon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        @keyframes rotate {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #0d4c27;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .stat-item {
+            text-align: center;
+            position: relative;
+        }
+
+        .stat-number {
+            font-size: 40px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #0d4c27, #1e7e4d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: countUp 2s ease-out;
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        /* Alasan Memilih Section */
+        .alasan-memilih {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e9 100%);
+            padding: 60px 20px;
+            margin-top: 0;
+        }
+
+        .alasan-memilih-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .alasan-memilih-header h2 {
+            font-size: 40px;
+            color: #0d4c27;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .alasan-memilih-header p {
+            font-size: 18px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .alasan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .alasan-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease both;
+        }
+
+        .alasan-card:nth-child(1) { animation-delay: 0.1s; }
+        .alasan-card:nth-child(2) { animation-delay: 0.2s; }
+        .alasan-card:nth-child(3) { animation-delay: 0.3s; }
+        .alasan-card:nth-child(4) { animation-delay: 0.4s; }
+        .alasan-card:nth-child(5) { animation-delay: 0.5s; }
+        .alasan-card:nth-child(6) { animation-delay: 0.6s; }
+        .alasan-card:nth-child(7) { animation-delay: 0.7s; }
+
+        .alasan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(30, 202, 123, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .alasan-card:hover::before {
+            left: 100%;
+        }
+
+        .alasan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(13, 76, 39, 0.15);
+            border-left: 5px solid #1eca7b;
+        }
+
+        .alasan-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #0d4c27, #1e7e4d);
+            color: white;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .alasan-card h3 {
+            font-size: 20px;
+            color: #0d4c27;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .alasan-card p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .alasan-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .alasan-memilih-header h2 {
+                font-size: 28px;
+            }
+        }
+
+        .about {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .about h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #0d4c27;
+        }
+
+        .about p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 60px;
+            border-top: 2px solid rgba(30, 202, 123, 0.3);
+            animation: slideUp 0.8s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        footer p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: #0d4c27;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #1eca7b;
+        }
+
+        /* Program Intrakurikuler Section */
+        .program-section {
+            background: white;
+            padding: 60px 20px;
+            margin-top: 0;
+        }
+
+        .program-header {
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .program-header h2 {
+            font-size: 40px;
+            color: #0d4c27;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .program-header p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .program-card {
+            background: linear-gradient(135deg, #f8fffe 0%, #e8f5e9 100%);
+            padding: 40px;
+            border-radius: 15px;
+            border: 2px solid #e0f2f1;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease both;
+        }
+
+        .program-card:nth-child(1) { animation-delay: 0.1s; }
+        .program-card:nth-child(2) { animation-delay: 0.2s; }
+        .program-card:nth-child(3) { animation-delay: 0.3s; }
+        .program-card:nth-child(4) { animation-delay: 0.4s; }
+        .program-card:nth-child(5) { animation-delay: 0.5s; }
+        .program-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0d4c27, #1e7e4d, #2ecc71);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+            transform-origin: left;
+        }
+
+        .program-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .program-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(13, 76, 39, 0.2);
+            background: linear-gradient(135deg, #fff 0%, #f1f8f6 100%);
+            border-color: #1eca7b;
+        }
+
+        .program-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            display: inline-block;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, rgba(13, 76, 39, 0.1), rgba(30, 202, 123, 0.1));
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .program-card:hover .program-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: linear-gradient(135deg, rgba(13, 76, 39, 0.2), rgba(30, 202, 123, 0.2));
+        }
+
+        .program-card h3 {
+            font-size: 22px;
+            color: #0d4c27;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .program-card p {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .program-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .program-header h2 {
+                font-size: 28px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            nav a {
+                margin-left: 15px;
+                font-size: 14px;
+            }
+
+            main {
+                padding: 20px;
+            }
+        }
+
+        /* Rainbow pulse effect */
+        @keyframes rainbowPulse {
+            0% { box-shadow: 0 0 20px rgba(13, 76, 39, 0.8); }
+            25% { box-shadow: 0 0 20px rgba(30, 126, 77, 0.8); }
+            50% { box-shadow: 0 0 20px rgba(46, 204, 113, 0.8); }
+            75% { box-shadow: 0 0 20px rgba(22, 163, 74, 0.8); }
+            100% { box-shadow: 0 0 20px rgba(13, 76, 39, 0.8); }
+        }
+
+        .rainbow-button {
+            animation: rainbowPulse 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Container -->
+    <div class="particles-container"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                SDIT As Syafi'iyah 01
+            </div>
+            <nav>
+                <a href="#beranda">Beranda</a>
+                <a href="#tentang">Tentang</a>
+                <a href="#fasilitas">Fasilitas</a>
+                <a href="#hubungi">Hubungi</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Banner Section -->
+        <section class="banner" id="beranda">
+            <div class="banner-content">
+                <h1>Selamat Datang di SDIT <br>As Syafi'iyah 01 Jakarta</h1>
+                <p>Membangun Generasi Islam yang Cerdas, Berakhlak Mulia, dan Berprestasi</p>
+                <button class="cta-button rainbow-button" onclick="window.open('https://wa.me/628129166498?text=Assalamualaikum%20Admin%20SDIT,%20Saya%20mau%20mendaftarkan%20Putra/Putri%20saya%20di%20SDIT%20As%20Syafi%27iyah%2001%20Jakarta', '_blank')">
+                    Daftar Sekarang
+                </button>
+            </div>
+        </section>
+
+        <!-- Alasan Memilih Section -->
+        <section class="alasan-memilih" id="mengapa">
+            <div class="alasan-memilih-header">
+                <h2>Mengapa Memilih SDIT As Syafi'iyah 01?</h2>
+                <p>Tujuh alasan kuat untuk mempercayakan pendidikan anak Anda kepada kami</p>
+            </div>
+            <div class="alasan-grid">
+                <div class="alasan-card">
+                    <div class="alasan-number">1</div>
+                    <h3>Kami Bertransformasi</h3>
+                    <p>Setiap waktu adalah moment bagi kami untuk melakukan perbaikan dalam berbagai aspek. Menjadi lebih baik adalah tujuan utama kami.</p>
+                </div>
+                <div class="alasan-card">
+                    <div class="alasan-number">2</div>
+                    <h3>Pelopor SDIT di Tebet</h3>
+                    <p>Sebagai yang pertama di wilayah Tebet menjadi tantangan bagi kami untuk selalu menjadi yang terdepan dalam kualitas.</p>
+                </div>
+                <div class="alasan-card">
+                    <div class="alasan-number">3</div>
+                    <h3>Pengalaman > 15 Tahun</h3>
+                    <p>Setiap tahun terlewati adalah pengalaman untuk menjadi lebih tahu cara memberikan yang terbaik dalam mendidik.</p>
+                </div>
+                <div class="alasan-card">
+                    <div class="alasan-number">4</div>
+                    <h3>Kompetensi Pendidik</h3>
+                    <p>Kompetensi tenaga pendidik yang selalu diperbarui untuk menjamin mutu pendidikan yang komprehensif sesuai target pencapaian.</p>
+                </div>
+                <div class="alasan-card">
+                    <div class="alasan-number">5</div>
+                    <h3>Terakreditasi A</h3>
+                    <p>Terakreditasi "A" dengan nilai 94 oleh Dinas Pendidikan DKI Jakarta dan terakreditasi secara Nasional di JSIT.</p>
+                </div>
+                <div class="alasan-card">
+                    <div class="alasan-number">6</div>
+                    <h3>Orientasi Akhlak & Ilmu</h3>
+                    <p>Meneguhkan prinsip kekuatan akhlak sebagai penghulu dan katalisator ilmu yang diperoleh seluruh siswa.</p>
+                </div>
+                <div class="alasan-card">
+                    <div class="alasan-number">7</div>
+                    <h3>Investasi Ringan</h3>
+                    <p>Penentuan biaya pendidikan tidak semata berpijak pada prinsip komersial namun pada kaidah tujuan pembinaan generasi Islam berkualitas.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Program Intrakurikuler Section -->
+        <section class="program-section" id="program">
+            <div class="program-header">
+                <h2>Program Intrakurikuler Unggulan</h2>
+                <p>Kompetensi dan keunggulan akademik yang kami tawarkan</p>
+            </div>
+            <div class="program-grid">
+                <div class="program-card">
+                    <div class="program-icon">📖</div>
+                    <h3>Pendidikan Agama Islam</h3>
+                    <p>Ilmu dan pengetahuan tauhid, fiqih serta sejarah Islam berbasis ahlussunah wal jama'ah dengan komposisi muatan sebesar 60% dari keseluruhan materi pembelajaran.</p>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">✏️</div>
+                    <h3>Baca Tulis Qur'an</h3>
+                    <p>Program pendidikan yang mencanangkan kemampuan membaca dan menulis Qur'an secara progresif sebagai salah satu standar keberhasilan pendidikan bagi seluruh siswa.</p>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">🌐</div>
+                    <h3>Bahasa Arab</h3>
+                    <p>Program lanjutan penunjang pendalaman serta eksplorasi kemampuan siswa dalam berbahasa dan memahami kandungan isi Al-Qur'an.</p>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">💬</div>
+                    <h3>Bahasa Inggris</h3>
+                    <p>Melengkapi peningkatan kapabilitas berbahasa internasional disamping Bahasa Arab dengan pola intensif dan penekanan pada metode reading, hearing dan speaking.</p>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">🧠</div>
+                    <h3>Tahfidzul Qur'an</h3>
+                    <p>Target penghafalan sekurangnya dua juz sejak awal menempuh hingga menyelesaikan Pendidikan di SDIT 01 As-Syafi'iyah dengan metode muroja'ah.</p>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">🔄</div>
+                    <h3>Pembiasaan</h3>
+                    <p>Pembiasaan sholat dhuha, aqidah mujmalah, muroja'ah juz 30, surah Yaasin dan Al-Kahfi, serta pembiasaan kedisiplinan, rasa hormat, rasa simpati dan empati.</p>
+                </div>
+            </div>
+        </section>
+
+    <!-- Footer -->
+    <footer id="hubungi">
+        <p>Alamat: JL. Masjid Al Barkah As-Sayfi'iyah No.17, Manggarai Selatan, Tebet, Jakarta Selatan, DKI Jakarta 12860</p>
+        <p>Telepon: +62 21 123-456-789 | Email: info@sdit-assyafiiyah01.sch.id</p>
+        <p>&copy; 2026 SDIT As Syafi'iyah 01. Semua Hak Dilindungi | <a href="#">Kebijakan Privasi</a></p>
+    </footer>
+
+    <script>
+        // Custom Cursor Effect
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 10 + 'px';
+            cursor.style.top = e.clientY - 10 + 'px';
+            cursorDot.style.left = e.clientX - 3 + 'px';
+            cursorDot.style.top = e.clientY - 3 + 'px';
+
+            // Create floating particles on mouse move
+            if (Math.random() > 0.8) {
+                createParticle(e.clientX, e.clientY);
+            }
+        });
+
+        // Interactive Elements - Cursor Change
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.width = '30px';
+                cursor.style.height = '30px';
+                cursor.style.borderColor = '#1eca7b';
+                cursorDot.style.background = '#1eca7b';
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                cursor.style.width = '20px';
+                cursor.style.height = '20px';
+                cursor.style.borderColor = '#16a34a';
+                cursorDot.style.background = '#16a34a';
+            });
+        });
+
+        // Create Floating Particles
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.textContent = ['●', '■', '▲', '★', '●'][Math.floor(Math.random() * 5)];
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            particle.style.fontSize = '20px';
+            particle.style.opacity = '1';
+            particle.style.animation = `particleFloat ${Math.random() * 2 + 2}s ease-out forwards`;
+            
+            document.querySelector('.particles-container').appendChild(particle);
+            
+            setTimeout(() => particle.remove(), 4000);
+        }
+
+        // Particle Animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes particleFloat {
+                0% {
+                    transform: translate(0, 0) scale(1);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translate(${Math.random() * 100 - 50}px, -100px) scale(0);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Button Click Effect
+        function handleButtonClick() {
+            // Create multiple particles
+            const btn = event.target;
+            const rect = btn.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    createParticle(x, y);
+                }, i * 50);
+            }
+
+            alert('Terima kasih telah tertarik! Segera hubungi kami untuk informasi lebih lanjut.');
+        }
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Add rainbow colors to feature cards on hover
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const colors = ['#0d4c27', '#1e7e4d', '#2ecc71', '#16a34a', '#1eca7b', '#0f5f38'];
+                card.style.background = colors[Math.floor(Math.random() * colors.length)] + '20';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.background = 'white';
+            });
+        });
+
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const parallax = document.querySelector('.hero');
+            parallax.style.transform = `translateY(${window.scrollY * 0.5}px)`;
+        });
+
+        console.log('SDIT As Syafi\'iyah 01 Website Loaded Successfully!');
+    </script>
+</body>
+</html>
