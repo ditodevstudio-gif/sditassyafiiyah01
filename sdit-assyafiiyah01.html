@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SDIT As Syafi'iyah 01 - Sekolah Dasar Islam Terpadu</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -697,6 +699,101 @@
             main {
                 padding: 20px;
             }
+
+            /* Banner responsive */
+            .banner {
+                min-height: 400px;
+                padding: 40px 20px;
+            }
+
+            .banner h1 {
+                font-size: 32px;
+                margin-bottom: 15px;
+                line-height: 1.3;
+            }
+
+            .banner p {
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+
+            .cta-button {
+                padding: 15px 40px;
+                font-size: 14px;
+            }
+
+            /* Katalog responsive */
+            .katalog-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .katalog-header h2 {
+                font-size: 24px;
+            }
+
+            .katalog-card {
+                padding: 25px 20px;
+            }
+
+            .katalog-icon {
+                font-size: 50px;
+                margin-bottom: 15px;
+            }
+
+            .katalog-card h3 {
+                font-size: 18px;
+            }
+
+            .katalog-card p {
+                font-size: 13px;
+            }
+
+            /* Alasan responsive */
+            .alasan-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .alasan-memilih-header h2 {
+                font-size: 28px;
+            }
+
+            /* Header responsive */
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            nav a {
+                margin-left: 0;
+            }
+
+            /* Footer responsive */
+            footer {
+                padding: 20px 15px;
+            }
+
+            footer p {
+                font-size: 13px;
+            }
+
+            .social-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
         }
 
         /* Rainbow pulse effect */
@@ -710,6 +807,203 @@
 
         .rainbow-button {
             animation: rainbowPulse 2s ease-in-out infinite;
+        }
+
+        /* Social Media Links */
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0d4c27, #1e7e4d);
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 20px;
+            box-shadow: 0 5px 15px rgba(13, 76, 39, 0.3);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(30, 202, 123, 0.5);
+            background: linear-gradient(135deg, #1e7e4d, #2ecc71);
+        }
+
+        /* Tagline Section */
+        .tagline {
+            font-size: 16px;
+            color: #1e7e4d;
+            font-weight: 600;
+            margin-top: 10px;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        footer .social-links {
+            margin-top: 30px;
+        }
+
+        footer .tagline {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Katalog Section */
+        .katalog-section {
+            background: linear-gradient(135deg, #f0f9f7 0%, #e0f2f1 100%);
+            padding: 60px 20px;
+            margin-top: 0;
+        }
+
+        .katalog-header {
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease both;
+        }
+
+        .katalog-header h2 {
+            font-size: 36px;
+            color: #0d4c27;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .katalog-header p {
+            font-size: 18px;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .katalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .katalog-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease both;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .katalog-card:nth-child(1) { animation-delay: 0.1s; }
+        .katalog-card:nth-child(2) { animation-delay: 0.2s; }
+        .katalog-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .katalog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0d4c27, #1e7e4d, #2ecc71);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+            transform-origin: left;
+        }
+
+        .katalog-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .katalog-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(13, 76, 39, 0.2);
+            border: 2px solid #1eca7b;
+        }
+
+        .katalog-icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            color: #0d4c27;
+        }
+
+        .katalog-card:hover .katalog-icon {
+            transform: scale(1.2) rotate(-5deg);
+            color: #1eca7b;
+        }
+
+        .katalog-card:nth-child(1) .katalog-icon {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .katalog-card:nth-child(2) .katalog-icon { color: #FF0000; }
+        .katalog-card:nth-child(3) .katalog-icon { color: #25D366; }
+
+        .katalog-card h3 {
+            font-size: 24px;
+            color: #0d4c27;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .katalog-card p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .katalog-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #1eca7b, #16a34a);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .katalog-card:hover .katalog-badge {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(30, 202, 123, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .katalog-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .katalog-header h2 {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
@@ -726,12 +1020,13 @@
         <div class="header-content">
             <div class="logo">
                 SDIT As Syafi'iyah 01
+                <div class="tagline" style="margin-top: 0; font-size: 10px; white-space: nowrap; margin-left: 10px;">Edukasi Digital Parenting</div>
             </div>
             <nav>
                 <a href="#beranda">Beranda</a>
-                <a href="#tentang">Tentang</a>
-                <a href="#fasilitas">Fasilitas</a>
-                <a href="#hubungi">Hubungi</a>
+                <a href="#katalog">Hubungi Kami</a>
+                <a href="#mengapa">Mengapa Kami</a>
+                <a href="#program">Program</a>
             </nav>
         </div>
     </header>
@@ -743,13 +1038,45 @@
             <div class="banner-content">
                 <h1>Selamat Datang di SDIT <br>As Syafi'iyah 01 Jakarta</h1>
                 <p>Membangun Generasi Islam yang Cerdas, Berakhlak Mulia, dan Berprestasi</p>
-                <button class="cta-button rainbow-button" onclick="window.open('https://wa.me/6281291664968?text=Assalamualaikum%20Admin%20SDIT,%20Saya%20mau%20mendaftarkan%20Putra/Putri%20saya%20di%20SDIT%20As%20Syafi%27iyah%2001%20Jakarta', '_blank')">
-                    Daftar Sekarang
+                <p style="font-size: 16px; color: rgba(255, 255, 255, 0.9); margin-top: 20px;">🌟 Edukasi Digital Parenting & Solusi Pendidikan Anak</p>
+                <button class="cta-button rainbow-button" onclick="window.open('https://wa.me/6281779236385?text=Assalamualaikum%20Admin%20SDIT,%20Saya%20tertarik%20dengan%20program%20SDIT%20As%20Syafi%27iyah%2001%20Jakarta', '_blank')">
+                    Hubungi Kami via WhatsApp
                 </button>
             </div>
         </section>
 
-        <!-- Alasan Memilih Section -->
+        <!-- Katalog Section -->
+        <section class="katalog-section" id="katalog">
+            <div class="katalog-header">
+                <h2>Hubungi & Ikuti Kami</h2>
+                <p>Tetap terhubung melalui berbagai saluran komunikasi kami untuk informasi terbaru dan keseharian SDIT</p>
+            </div>
+            <div class="katalog-grid">
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/sdit_assyafiiyah_01" target="_blank" class="katalog-card" title="Follow Instagram">
+                    <div class="katalog-icon"><i class="fab fa-instagram"></i></div>
+                    <h3>Instagram</h3>
+                    <p>Ikuti keseharian kami dan dapatkan update terbaru melalui Instagram official</p>
+                    <span class="katalog-badge">Kunjungi →</span>
+                </a>
+
+                <!-- YouTube -->
+                <a href="https://www.youtube.com/@SahabatSDIT01Assyafiiyah" target="_blank" class="katalog-card" title="Subscribe YouTube">
+                    <div class="katalog-icon"><i class="fab fa-youtube"></i></div>
+                    <h3>YouTube Channel</h3>
+                    <p>Tonton konten edukatif dan dokumentasi kegiatan sekolah di channel YouTube kami</p>
+                    <span class="katalog-badge">Subscribe →</span>
+                </a>
+
+                <!-- WhatsApp -->
+                <a href="https://wa.me/6281779236385" target="_blank" class="katalog-card" title="Chat WhatsApp">
+                    <div class="katalog-icon"><i class="fab fa-whatsapp"></i></div>
+                    <h3>WhatsApp</h3>
+                    <p>Hubungi kami langsung untuk informasi pendaftaran dan tanya jawab seputar sekolah</p>
+                    <span class="katalog-badge">Chat Sekarang →</span>
+                </a>
+            </div>
+        </section>
         <section class="alasan-memilih" id="mengapa">
             <div class="alasan-memilih-header">
                 <h2>Mengapa Memilih SDIT As Syafi'iyah 01?</h2>
@@ -837,8 +1164,25 @@
     <!-- Footer -->
     <footer id="hubungi">
         <p>Alamat: JL. Masjid Al Barkah As-Sayfi'iyah No.17, Manggarai Selatan, Tebet, Jakarta Selatan, DKI Jakarta 12860</p>
-        <p>Telepon: +62 21 123-456-789 | Email: info@sdit-assyafiiyah01.sch.id</p>
-        <p>&copy; 2026 SDIT As Syafi'iyah 01. Semua Hak Dilindungi | <a href="#">Kebijakan Privasi</a></p>
+        <p>WhatsApp: <a href="https://wa.me/6281779236385" target="_blank">+62 817 7923 6385</a></p>
+        <p>Email: info@sdit-assyafiiyah01.sch.id</p>
+        
+        <!-- Social Media Links -->
+        <div class="social-links">
+            <a href="https://www.instagram.com/sdit_assyafiiyah_01" target="_blank" class="social-icon" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/@SahabatSDIT01Assyafiiyah" target="_blank" class="social-icon" title="YouTube">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://wa.me/6281779236385" target="_blank" class="social-icon" title="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+        
+        <div class="tagline">🌟 Edukasi Digital Parenting & Solusi Pendidikan Anak</div>
+        
+        <p style="margin-top: 30px; font-size: 12px; color: #999;">&copy; 2026 SDIT As Syafi'iyah 01. Semua Hak Dilindungi | <a href="#">Kebijakan Privasi</a> | <a href="https://linktr.ee/SahabatSDITAssyafiiyah?utm_source=qr_code" target="_blank">Linktree</a></p>
     </footer>
 
     <script>
